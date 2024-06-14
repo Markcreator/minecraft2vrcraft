@@ -2,6 +2,8 @@ package net.Markcreator.minecraft2vrcraft;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -40,11 +42,21 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("export")) {
+			boolean addBedrock = false;
+			if (ArrayUtils.indexOf(args, "bedrock") != ArrayUtils.INDEX_NOT_FOUND)
+			{
+				addBedrock = true;
+			}
+			
 			if (sender instanceof Player player) {
-				String export = exportWorld(player, player.getLocation().clone().add(-WORLD_SIZE.getBlockX() / 2, -WORLD_SIZE.getBlockY() / 2, -WORLD_SIZE.getBlockZ() / 2));
-								
+				String export = exportWorld(player, player.getLocation().clone().add(-WORLD_SIZE.getBlockX() / 2, -WORLD_SIZE.getBlockY() / 2, -WORLD_SIZE.getBlockZ() / 2), addBedrock);
+				
 				try {
-					File file = new File(this.getDataFolder(), "export.txt");
+					LocalDateTime now = LocalDateTime.now();
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
+			        String fileName = "export-" + now.format(formatter) + ".txt";
+
+					File file = new File(this.getDataFolder(), fileName);
 					if (!file.getParentFile().exists())
 					{
 						file.getParentFile().mkdir();
@@ -74,7 +86,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		return false; 
 	}
 
-	private String exportWorld(Player player, Location origin) {
+	private String exportWorld(Player player, Location origin, boolean addBedrock) {
 		int chunkX = WORLD_SIZE.getBlockX() / Chunk.CHUNK_SIZE;
 		int chunkY = WORLD_SIZE.getBlockY() / Chunk.CHUNK_SIZE;
 		int chunkZ = WORLD_SIZE.getBlockZ() / Chunk.CHUNK_SIZE;
@@ -88,7 +100,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 				for (int x = 0; x < chunkX; x++) {
 					Vector chunkId = new Vector(chunkX - x, y, z);
 					Location relativePos = origin.clone().add(new Vector(WORLD_SIZE.getBlockX() - x * Chunk.CHUNK_SIZE, y * Chunk.CHUNK_SIZE, z * Chunk.CHUNK_SIZE));
-					chunks[i++] = new Chunk(origin.getWorld(), chunkId, relativePos);;
+					chunks[i++] = new Chunk(origin.getWorld(), chunkId, relativePos, addBedrock);
 				}
 			}
 		}

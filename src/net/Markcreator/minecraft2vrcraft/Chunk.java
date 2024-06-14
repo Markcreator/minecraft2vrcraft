@@ -11,11 +11,13 @@ public class Chunk {
 	private World world;
 	private Vector chunkId;
 	private Location pos;
+	private boolean addBedrock;
 	
-	public Chunk(World world, Vector chunkId, Location pos) {
+	public Chunk(World world, Vector chunkId, Location pos, boolean addBedrock) {
 		this.world = world;
 		this.chunkId = chunkId;
 		this.pos = pos;
+		this.addBedrock = addBedrock;
 	}
 	
 	public int chunkX() {
@@ -38,7 +40,18 @@ public class Chunk {
 			for (int z = 0; z < CHUNK_SIZE; z++) {
 				for (int x = 0; x < CHUNK_SIZE; x++) {
 					Location relativeBlock = pos.clone().add(new Vector(CHUNK_SIZE - x, y, z));
-					blocks[i++] = world.getBlockAt(relativeBlock).getType().name().toLowerCase();
+					String name = world.getBlockAt(relativeBlock).getType().name().toLowerCase();
+					
+					if (name.equals("water"))
+					{
+						name = "water_still";
+					}
+					
+					if (addBedrock && chunkId.getBlockY() == 0 && y == 0) {
+						name = "bedrock";
+					}
+					
+					blocks[i++] = name;
 				}
 			}
 		}
