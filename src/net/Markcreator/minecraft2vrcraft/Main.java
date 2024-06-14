@@ -42,7 +42,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("export")) {
 			if (sender instanceof Player player) {
 				String export = exportWorld(player, player.getLocation().clone().add(-WORLD_SIZE.getBlockX() / 2, -WORLD_SIZE.getBlockY() / 2, -WORLD_SIZE.getBlockZ() / 2));
-				
+								
 				try {
 					File file = new File(this.getDataFolder(), "export.txt");
 					if (!file.getParentFile().exists())
@@ -86,9 +86,9 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		for (int y = 0; y < chunkY; y++) {
 			for (int z = 0; z < chunkZ; z++) {
 				for (int x = 0; x < chunkX; x++) {
-					Vector chunkId = new Vector(x, y, z);
-					Location relativePos = origin.clone().add(new Vector(x * Chunk.CHUNK_SIZE, y * Chunk.CHUNK_SIZE, z * Chunk.CHUNK_SIZE));
-					chunks[i++] = new Chunk(origin.getWorld(), chunkId, relativePos);
+					Vector chunkId = new Vector(chunkX - x, y, z);
+					Location relativePos = origin.clone().add(new Vector(WORLD_SIZE.getBlockX() - x * Chunk.CHUNK_SIZE, y * Chunk.CHUNK_SIZE, z * Chunk.CHUNK_SIZE));
+					chunks[i++] = new Chunk(origin.getWorld(), chunkId, relativePos);;
 				}
 			}
 		}

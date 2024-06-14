@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/markm/Desktop/spigot-api-1.20.6-R0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="C:/Users/markm/Desktop/BungeeCord.jar"/>
+	<classpathentry kind="lib" path="C:/Users/markm/Desktop/spigot-api-1.21-R0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

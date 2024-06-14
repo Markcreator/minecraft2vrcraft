@@ -37,7 +37,7 @@ public class Chunk {
 		for (int y = 0; y < CHUNK_SIZE; y++) {
 			for (int z = 0; z < CHUNK_SIZE; z++) {
 				for (int x = 0; x < CHUNK_SIZE; x++) {
-					Location relativeBlock = pos.clone().add(new Vector(x, y, z));
+					Location relativeBlock = pos.clone().add(new Vector(CHUNK_SIZE - x, y, z));
 					blocks[i++] = world.getBlockAt(relativeBlock).getType().name().toLowerCase();
 				}
 			}
