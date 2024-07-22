@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -49,6 +50,11 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 			}
 			
 			if (sender instanceof Player player) {
+				if (!player.isOp() && !player.hasPermission("minecraft2vrcraft.export")) {
+					player.sendMessage(ChatColor.RED + "Not allowed. You are not OP and do not have the 'minecraft2vrcraft.export' permission.");
+					return false;
+				}
+				
 				String export = exportWorld(player, player.getLocation().clone().add(-WORLD_SIZE.getBlockX() / 2, -WORLD_SIZE.getBlockY() / 2, -WORLD_SIZE.getBlockZ() / 2), addBedrock);
 				
 				try {

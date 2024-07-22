@@ -1,7 +1,7 @@
 name: minecraft2vrcraft
 main: net.Markcreator.minecraft2vrcraft.Main
-version: 1.1
-api-version: 1.21
+version: 1.3
+api-version: 1.20
 author: Markcreator
 commands:
   export:

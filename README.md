@@ -2,7 +2,7 @@
 
 ## Overview
 
-Minecraft2VRCraft is a Bukkit plugin designed to export Minecraft world data in the format that can be used in VRCraft.
+Minecraft2VRCraft is a Bukkit plugin for Minecraft 1.20 and higher servers designed to export Minecraft world data in the format that can be used in VRCraft.
 This plugin allows players to export sections of their Minecraft world and save the export data to a file.
 
 ## Installation
@@ -15,7 +15,7 @@ This plugin allows players to export sections of their Minecraft world and save 
 
 ### `/export [bedrock]`
 
-- **Description:** Exports a section of the world centered around the player. If the `bedrock` argument is provided, a bedrock layer will be included in the export.
+- **Description:** Exports a section of the world centered around the player. If the `bedrock` argument is provided, a bedrock layer will be included in the export. The player need to be an operator or have the `minecraft2vrcraft.export` permission.
 - **Usage:** 
   - `/export` - Exports the world without bedrock.
   - `/export bedrock` - Exports the world with a bedrock layer included.
