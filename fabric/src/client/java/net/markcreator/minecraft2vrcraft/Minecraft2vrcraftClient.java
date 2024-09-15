@@ -6,7 +6,10 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.server.command.CommandManager;
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.block.Block;
@@ -158,7 +161,16 @@ public class Minecraft2vrcraftClient implements ClientModInitializer {
 			writer.close();
 
 			player.sendMessage(
-					Text.literal("Export successful! File saved as: " + file.getAbsolutePath()),
+					Text.literal("Export successful! File saved as: ")
+							.append(
+									Text.literal(file.getName())
+											.styled(style -> style
+													.withColor(TextColor.fromRgb(0x55FFFF))
+													.withUnderline(true)
+													.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, file.getParentFile().getAbsolutePath()))
+													.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal("Click to open folder")))
+											)
+							),
 					false
 			);
 		} catch (Exception e) {
