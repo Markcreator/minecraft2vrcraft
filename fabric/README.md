@@ -6,7 +6,7 @@ Minecraft2VRCraft is a Fabric mod for Minecraft client designed to export Minecr
 
 ## Installation
 
-1. Ensure you have Fabric installed for your Minecraft client.
+1. Ensure you have Fabric installed for your Minecraft 1.21.1 client (API: fabric-api-0.115.6+1.21.1.jar). Any other version may cause problems.
 2. Download the Minecraft2VRCraft mod jar file.
 3. Place the jar file in your Minecraft `mods` folder.
 4. Launch Minecraft with the Fabric profile.
